@@ -8,7 +8,7 @@
 ## -------------------------------------------------------------
 ##
 ## This script contains several routines to create a statistical
-## argument against the posibility of forming the string 'MU'
+## argument against the possibility of forming the string 'MU'
 ## From the string 'MI' using the following rules:
 ## 1.- MxI    -> MxIU
 ## 2.- Mx     -> Mxx
@@ -137,6 +137,22 @@ def iterate(string, M = 100):
     return lengths
 
 ## -----------------------------------
+## Mean dist:
+## Obtains the average distribution of
+## N iterations of iterate
+## -----------------------------------
+def mean_dist(string, N = 1000, M = 100):
+    means = []
+    for i in range(N):
+        lengths = iterate(string, M)
+        means.append(np.mean(lengths))
+    return means
+
+## -----------------------------------
 ## Test
 ## -----------------------------------
-lengths = iterate("MI")
+means = mean_dist("MI")
+
+## Histogram
+plt.hist(means)
+plt.show()
