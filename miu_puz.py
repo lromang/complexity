@@ -149,10 +149,12 @@ def mean_dist(string, N = 1000, M = 100):
     return means
 
 ## -----------------------------------
-## Test
+## Tests
 ## -----------------------------------
-means = mean_dist("MI")
+lengths = iterate("MI")
+
+means   = mean_dist("MI", 100, 10)
 
 ## Histogram
-plt.hist(means)
+plt.hist(one_iter)
 plt.show()
