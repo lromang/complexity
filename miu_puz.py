@@ -81,7 +81,7 @@ def niforu(string):
 ## Ufornot:
 ## This function performs rule
 ## 4. MxUUx -> Mxx. With a probability
-## of .5 to one instance of III.
+## of .5 to one instance of UU.
 ## -----------------------------------
 def ufornot(string, begIndex):
     if random.randint(0,1) == 1:
@@ -92,10 +92,10 @@ def ufornot(string, begIndex):
 ## Niforu:
 ## This function performs rule
 ## 4. MxUUx -> Mxx. With a probability
-## of .5 to any instances of III.
+## of .5 to any instances of UU.
 ## -----------------------------------
 def nufornot(string):
-    ## All instances of III
+    ## All instances of  UU
     indexes = [m.start() for m in re.finditer('(?=UU)', string)]
     ## Select one for change
     if len(indexes) > 0:
