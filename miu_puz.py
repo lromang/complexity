@@ -156,5 +156,5 @@ lengths = iterate("MI")
 means   = mean_dist("MI", 100, 10)
 
 ## Histogram
-plt.hist(one_iter)
+plt.hist(lengths)
 plt.show()
