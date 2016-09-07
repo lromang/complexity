@@ -19,10 +19,12 @@
 ################################
 ## Libraries
 ################################
+from scipy import stats
 import numpy as np
 import matplotlib.pyplot as plt
 import random
 import re
+
 
 ################################
 ## Functions
@@ -175,3 +177,8 @@ plt.show()
 ## -----------------------------------
 ## Test of hypothesis
 ## -----------------------------------
+p2 = stats.ttest_1samp(means, 2)
+
+## With a p-value of 4.1622028363857869e-132 we can claime
+## that the population mean for the mean's distribution
+## is not 2.
