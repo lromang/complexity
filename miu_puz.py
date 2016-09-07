@@ -110,51 +110,68 @@ def nufornot(string):
 ## of the system
 ## -----------------------------------
 def apply_rule(string):
-    rule = random.randint(1, 3)
-    if rule == 1:
-        return addu(string)
-    if rule == 2:
-        return duplicate(string)
-    if rule == 3:
-        return niforu(string)
-    return nufornot(string)
+    new_string = string # Auxiliar string
+    while new_string == string: # Avoid returning string without change
+        rule = random.randint(1, 4)
+        if rule == 1:
+            new_string =  addu(string)
+        if rule == 2:
+            new_string =  duplicate(string)
+        if rule == 3:
+            new_string =  niforu(string)
+        if rule == 4:
+            new_string = nufornot(string)
+    return new_string
 
 ## -----------------------------------
 ## Iterate:
 ## This function applies all the rules
 ## in different order and stops when
 ## getting "MU" (never) or after M
-## iterations
+## applications
 ## -----------------------------------
-def iterate(string, M = 100):
+def iterate(string, M = 10):
     count   = 0
-    lengths = []
-    while string != "MU" and string != "M" and count < 100:
+    while string != "MU" and string != "M" and count < M:
         string = apply_rule(string)
         count  = count + 1
-        lengths.append(len(string))
-        # print(string)
-    return lengths
+    return string
 
 ## -----------------------------------
-## Mean dist:
-## Obtains the average distribution of
-## N iterations of iterate
+## Mean and Sd:
+## Obtains the average and standard
+## deviation of N iterations of M
+## rules applied.
 ## -----------------------------------
-def mean_dist(string, N = 1000, M = 100):
-    means = []
+def mean_str(string, N = 1000, M = 10):
+    lengths = []
     for i in range(N):
-        lengths = iterate(string, M)
-        means.append(np.mean(lengths))
-    return means
+        new_string = iterate(string, M)
+        lengths.append(len(new_string))
+    return np.mean(lengths)
 
 ## -----------------------------------
-## Tests
+## Mean, Sd dist:
+## Obtains the average and standard
+## deviation of N iterations of M
+## rules applied.
 ## -----------------------------------
-lengths = iterate("MI")
+def mean_dist(string, boots = 1000, N = 1000, M = 10):
+    mean_d = []
+    for i in range(boots):
+        mean = mean_str(string, N, M)
+        mean_d.append(mean)
+    return mean_d
 
-means   = mean_dist("MI", 100, 10)
+## -----------------------------------
+## Means distribution
+## -----------------------------------
+means = mean_dist("MI", 100, 1000, 10)
 
 ## Histogram
-plt.hist(lengths)
+plt.hist(means)
 plt.show()
+
+## -----------------------------------
+## Test of hypothesis
+## -----------------------------------
